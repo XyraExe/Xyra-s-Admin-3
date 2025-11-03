@@ -828,11 +828,11 @@ NATOPBARVISIBLE = true
 if getgenv().NATestingVer then
 	opt.loaderUrl = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/NA%20testing.lua"
 	opt.githubUrl="https://api.github.com/repos/ltseverydayyou/Nameless-Admin/commits?path=NA%20testing.lua"
-	opt.NAUILOADER="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAUITEST.lua"
+	opt.NAUILOADER="https://raw.githubusercontent.com/XyraExe/XAUITEST/refs/heads/main/XAtesting"
 else
 	opt.loaderUrl = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
 	opt.githubUrl="https://api.github.com/repos/ltseverydayyou/Nameless-Admin/commits?path=Source.lua"
-	opt.NAUILOADER="https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/refs/heads/main/NAUI.lua"
+	opt.NAUILOADER="https://raw.githubusercontent.com/XyraExe/XAUITEST/refs/heads/main/XAtesting"
 end
 
 NAlib.connect = function(name, connection)
@@ -1934,7 +1934,7 @@ NAmanage.registerRemoteForPreload=function(url, options)
 end
 
 if not NAAssetsLoading.setStatus then
-	NAAssetsLoading.ui, NAAssetsLoading.setStatus, NAAssetsLoading.setPercent, NAAssetsLoading.completed, NAAssetsLoading.getSkip = NAmanage.createLoadingUI((adminName or "NA").." is loading...", {widthScale=0.30})
+	NAAssetsLoading.ui, NAAssetsLoading.setStatus, NAAssetsLoading.setPercent, NAAssetsLoading.completed, NAAssetsLoading.getSkip = NAmanage.createLoadingUI((adminName or "XA").." is loading...", {widthScale=0.30})
 	NaProtectUI(NAAssetsLoading.ui)
 end
 
@@ -2000,7 +2000,7 @@ end
 until assetsReady or NAAssetsLoading.getSkip()
 NAAssetsLoading.setPercent(0.26)
 
-NAAssetsLoading.setStatus("Loading "..(adminName or "NA").." Data")
+NAAssetsLoading.setStatus("Loading "..(adminName or "XA").." Data")
 local naStuffReady = false
 repeat
   local ok, res = pcall(function()
@@ -7196,7 +7196,7 @@ NAmanage.AutoExecSave=function(data, context)
 		if context == 'loader' then
 			NAmanage.loaderWarn('AutoExec', 'failed to update storage: '..tostring(err))
 		else
-			warn("[NA] AutoExec save failed: "..tostring(err))
+			warn("[XA] AutoExec save failed: "..tostring(err))
 		end
 	end
 	return ok
@@ -7555,7 +7555,7 @@ NAmanage.InitPlugs=function()
 
 	cmd.add(
 		{"addplugin","addplug","ap","aplug"},
-		{"addplugin","Move one .na from workspace into Nameless-Admin/Plugins and load it"},
+		{"addplugin","Move one .na from workspace into Xyra-Admin/Plugins and load it"},
 		function(...)
 			mk(plugsDir)
 			local query = tostring((...) or ""):lower()
@@ -11067,7 +11067,7 @@ if IsOnMobile then
 	end)
 end
 
-cmd.add({"commandcount","cc"},{"commandcount (cc)","Counds how many commands NA has"},function()
+cmd.add({"commandcount","cc"},{"commandcount (cc)","Counds how many commands XA has"},function()
 	DoNotif(adminName.." currently has "..commandcount.." commands")
 end)
 
@@ -16538,25 +16538,25 @@ cmd.add({"unbubblechat","unbchat"},{"unbubblechat (unbchat)","Disabled BubbleCha
 	NAmanage.ApplyTextChatSettings()
 end)
 
-cmd.add({"hideicon","iconhide"},{"hideicon","Hides the NA icon"},function()
+cmd.add({"hideicon","iconhide"},{"hideicon","Hides the XA icon"},function()
 	if NAmanage.IconSetInvisible then
 		NAmanage.IconSetInvisible(true)
 	end
 end)
 
-cmd.add({"showicon","iconshow"},{"showicon","Shows the NA icon"},function()
+cmd.add({"showicon","iconshow"},{"showicon","Shows the XA icon"},function()
 	if NAmanage.IconSetInvisible then
 		NAmanage.IconSetInvisible(false)
 	end
 end)
 
-cmd.add({"lockiconposition","lockicon"},{"lockiconposition","Locks the NA icon's position (can't be dragged)"},function()
+cmd.add({"lockiconposition","lockicon"},{"lockiconposition","Locks the XA icon's position (can't be dragged)"},function()
 	if NAgui.setIconLocked then
 		NAgui.setIconLocked(true)
 	end
 end)
 
-cmd.add({"unlockiconposition","unlockicon"},{"unlockiconposition","Unlocks the NA icon's position (can be dragged again)"},function()
+cmd.add({"unlockiconposition","unlockicon"},{"unlockiconposition","Unlocks the XA icon's position (can be dragged again)"},function()
 	if NAgui.setIconLocked then
 		NAgui.setIconLocked(false)
 	end
@@ -34329,7 +34329,7 @@ cmd.add({"rename"}, {"rename <text>", "Renames the admin UI placeholder to the g
 end, true)
 
 cmd.add({"unname"}, {"unname", "Resets the admin UI placeholder name to default"}, function()
-	adminName = getgenv().NATestingVer and "NA Testing" or "Nameless Admin"
+	adminName = getgenv().NATestingVer and "XA Testing" or "Xyra Admin"
 	if NAUIMANAGER.cmdInput and NAUIMANAGER.cmdInput.PlaceholderText then
 		NAUIMANAGER.cmdInput.PlaceholderText = isAprilFools() and '🤡 '..adminName..curVer..' 🤡' or getSeasonEmoji()..' '..adminName..curVer..' '..getSeasonEmoji()
 	end
@@ -35149,7 +35149,7 @@ NAmanage.StartUIAutoSyncLoop = function()
 			task.wait(0.25)
 			local ok, err = pcall(NAmanage.RunUIAutoSync)
 			if not ok then
-				warn("[NA] UI auto-sync failed:", err)
+				warn("[XA] UI auto-sync failed:", err)
 			end
 		end
 	end)
@@ -37588,10 +37588,10 @@ else
 	TextButton.TextColor3 = Color3.fromRGB(241, 241, 241)
 	TextButton.TextSize = 22
 	if isAprilFools() then
-		cringyahhnamesidk = { "IY", "FE", "F3X", "HD", "CMD", "Ω", "R6", "Ø", "NA", "CMDX" }
+		cringyahhnamesidk = { "IY", "FE", "F3X", "HD", "CMD", "Ω", "R6", "Ø", "XA", "CMDX" }
 		TextButton.Text = cringyahhnamesidk[math.random(1, #cringyahhnamesidk)]
 	else
-		TextButton.Text = "NA"
+		TextButton.Text = "XA"
 	end
 end
 
@@ -37744,7 +37744,7 @@ NAgui.setIconHidden=function(hidden, opts)
 		pcall(NAmanage.NASettingsSet, "iconInvisible", hidden)
 	end
 	if not opts.skipToggle and NAgui.setToggleState then
-		NAgui.setToggleState("Hide NA Icon", hidden, { force = true, fire = false })
+		NAgui.setToggleState("Hide XA Icon", hidden, { force = true, fire = false })
 	end
 end
 
@@ -37779,7 +37779,7 @@ NAgui.setIconLocked=function(locked, opts)
 		NAmanage.NASettingsSet("iconLocked", locked)
 	end
 	if not opts.skipToggle and NAgui.setToggleState then
-		NAgui.setToggleState("Lock NA Icon", locked, { force = true, fire = false })
+		NAgui.setToggleState("Lock XA Icon", locked, { force = true, fire = false })
 	end
 end
 
@@ -38101,7 +38101,7 @@ end
 	for _, id in ipairs(_G.NAadminsLol or {}) do
 		if pl.UserId == id then
 			local props = InstanceNew("TextChatMessageProperties")
-			local tag = NAmanage.grayGradient("[NA ADMIN]")
+			local tag = NAmanage.grayGradient("[XA ADMIN]")
 			local finalPrefix = basePrefix
 			if NAStuff.ForceAdminRainbow then
 				local nm = nameChecker(pl)
@@ -38245,7 +38245,7 @@ NAmanage.injectNAConsole = function()
 	textbox.BackgroundTransparency = 1
 	textbox.ClearTextOnFocus = false
 	textbox.Font = Enum.Font.Code
-	textbox.PlaceholderText = "NA Console Master"
+	textbox.PlaceholderText = "XA Console Master"
 	textbox.Size = UDim2.new(1, 0, 1, 0)
 	textbox.Text = ""
 	textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -38413,7 +38413,7 @@ SpawnCall(function() -- init
 end)
 
 NAmanage.scheduleLoader('BindDevConsole', NAmanage.bindToDevConsole)
-NAmanage.scheduleLoader('NAConsole', NAmanage.injectNAConsole)
+NAmanage.scheduleLoader('XAConsole', NAmanage.injectNAConsole)
 NAmanage.scheduleLoader('Aliases', NAmanage.loadAliases)
 NAmanage.scheduleLoader('UserButtons', function()
 	NAmanage.loadButtonIDS()
@@ -39051,7 +39051,7 @@ end)
 
 --[[if Discover(_G.NAadminsLol or {}, LocalPlayer.UserId) then
 	if NAgui.addSection then
-		NAgui.addSection("NA Admin")
+		NAgui.addSection("XA Admin")
 	end
 	NAgui.addToggle("Admin RGB Username", NAStuff.ForceAdminRainbow, function(state)
 		NAStuff.ForceAdminRainbow = state
@@ -39112,7 +39112,7 @@ NAgui.addToggle("Hide XA Icon", NAStuff.IconInvisible, function(v)
 	NAmanage.IconSetInvisible(v, { skipToggle = true, force = true })
 	DoNotif("Icon Visibility is "..(v and "Off" or "On"), 2)
 end)
-NAmanage.RegisterToggleAutoSync("Hide NA Icon", function()
+NAmanage.RegisterToggleAutoSync("Hide XA Icon", function()
 	return NAStuff.IconInvisible == true
 end)
 
@@ -39120,7 +39120,7 @@ NAgui.addToggle("Lock XA Icon", NAStuff.IconLocked, function(v)
 	NAgui.setIconLocked(v, { force = true, skipToggle = true })
 	DoNotif("Icon Position is "..(v and "Locked" or "Unlocked"), 2)
 end)
-NAmanage.RegisterToggleAutoSync("Lock NA Icon", function()
+NAmanage.RegisterToggleAutoSync("Lock XA Icon", function()
 	return NAStuff.IconLocked == true
 end)
 
@@ -39182,7 +39182,7 @@ NAgui.setTab(TAB_INTERFACE)
 
 NAgui.addSection("UI Customization")
 
-NAgui.addSlider("NA Icon Size", 0.5, 3, NAScale, 0.01, "", function(val)
+NAgui.addSlider("XA Icon Size", 0.5, 3, NAScale, 0.01, "", function(val)
 	NAScale = val
 	TextButton.Size = UDim2.new(0, 32 * val, 0, 33 * val)
 	NAmanage.NASettingsSet("buttonSize", val)
@@ -40099,7 +40099,7 @@ do
 		{
 			title = "Flags";
 			fields = {
-				{ id = "naVersion", label = "NA Version", path = {"flags","version"} };
+				{ id = "naVersion", label = "XA Version", path = {"flags","version"} };
 				{ id = "aprilMode", label = "April Fools Mode", path = {"flags","aprilFools"} };
 				{ id = "timestamp", label = "Timestamp", path = "timestamp" };
 			};
@@ -40480,7 +40480,7 @@ NAmanage.RefreshGitHubCommits = function(forceRefresh)
 		if type(message) == "string" and #message > 128 then
 			message = message:sub(1, 125).."..."
 		end
-		warn("[NA] GitHub commit fetch failed:", message)
+		warn("[XA] GitHub commit fetch failed:", message)
 		NAmanage.UpdateGitHubCommitUI(nil, "Error: "..message)
 	end
 	return ok
@@ -40703,3 +40703,20 @@ SpawnCall(function()
 	end
 end)
 
+--[[print(
+	
+███╗░░██╗░█████╗░███╗░░░███╗███████╗██╗░░░░░███████╗░██████╗░██████╗
+████╗░██║██╔══██╗████╗░████║██╔════╝██║░░░░░██╔════╝██╔════╝██╔════╝
+██╔██╗██║███████║██╔████╔██║█████╗░░██║░░░░░█████╗░░╚█████╗░╚█████╗░
+██║╚████║██╔══██║██║╚██╔╝██║██╔══╝░░██║░░░░░██╔══╝░░░╚═══██╗░╚═══██╗
+██║░╚███║██║░░██║██║░╚═╝░██║███████╗███████╗███████╗██████╔╝██████╔╝
+╚═╝░░╚══╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚══════╝╚══════╝╚═════╝░╚═════╝░
+
+░█████╗░██████╗░███╗░░░███╗██╗███╗░░██╗
+██╔══██╗██╔══██╗████╗░████║██║████╗░██║
+███████║██║░░██║██╔████╔██║██║██╔██╗██║
+██╔══██║██║░░██║██║╚██╔╝██║██║██║╚████║
+██║░░██║██████╔╝██║░╚═╝░██║██║██║░╚███║
+╚═╝░░╚═╝╚═════╝░╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝
+
+)]]
